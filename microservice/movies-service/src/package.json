@@ -1,0 +1,22 @@
+{
+  "name": "movies-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node index.test | tap-spec"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv-safe": "^8.2.0",
+    "express": "^4.17.3",
+    "helmet": "^5.0.2",
+    "mongodb": "^4.5.0",
+    "morgan": "^1.10.0",
+    "tap-spec": "^5.0.0",
+    "tape": "^5.5.3"
+  }
+}
