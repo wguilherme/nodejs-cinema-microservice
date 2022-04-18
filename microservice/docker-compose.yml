@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  mongo_movies_service:
+    image: mongo
+    container_name: local_pgdb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - ${PWD}/localdb/mongo:/data/db

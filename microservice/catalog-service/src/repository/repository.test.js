@@ -1,3 +1,4 @@
+//repository.test.js
 require('dotenv-safe').config();
 const repository = require('./repository');
 let testCityId = null;
@@ -54,4 +55,4 @@ test('Repository getMovieSessionsByCinemaId', async () => {
   const result = await repository.getMovieSessionsByCinemaId(testMovieId, testCinemaId);
   expect(Array.isArray(result)).toBeTruthy();
   expect(result.length).toBeGreaterThan(0);
-}
+})

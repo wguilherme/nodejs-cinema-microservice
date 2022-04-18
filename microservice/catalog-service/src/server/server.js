@@ -1,26 +1,27 @@
-const express = require('express')
-const morgan = require('morgan')
-const helmet = require('helmet')
-let server = null
+//server.js
+require("express-async-errors");
+const express = require('express');
+const morgan = require('morgan');
+let server = null;
 
-function start(api, repository, callback) {
+async function start(api, repository) {
+    const app = express();
+    app.use(morgan('dev'));
 
-  const app = express()
-  app.use(morgan('dev'))
-  app.use(helmet())
-  app.use((err, req, res, next) => {
-    callback(new Error('Something went wrong!, err: ' + err), null)
-    res.status(500).send('Something went wrong!')
+    app.use((err, req, res, next) => {
+        console.error(err);
+        res.sendStatus(500);
+    })
 
-  })
+    api(app, repository);
 
-  api(app, repository)
-  server = app.listen(parseInt(process.env.PORT), () => callback(null, server))
+    server = app.listen(process.env.PORT);
+    return server;
 }
 
-function stop() {
-  if (server) server.close()
-  return true
+async function stop() {
+    if (server) await server.close();
+    return true;
 }
 
 module.exports = { start, stop }

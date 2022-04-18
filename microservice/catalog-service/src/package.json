@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "node index.test | tap-spec"
+    "start": "nodemon index.js",
+    "test": "jest --verbose --watchAll"
   },
   "keywords": [],
   "author": "",
@@ -13,11 +13,13 @@
   "dependencies": {
     "dotenv-safe": "^8.2.0",
     "express": "^4.17.3",
+    "express-async-errors": "^3.1.1",
     "helmet": "^5.0.2",
-    "mongodb": "^4.5.0",
-    "morgan": "^1.10.0",
-    "supertest": "^6.2.2",
-    "tap-spec": "^5.0.0",
-    "tape": "^5.5.3"
+    "mongodb": "^4.0.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "supertest": "^6.2.2"
   }
 }

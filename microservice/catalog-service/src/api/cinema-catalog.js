@@ -23,6 +23,7 @@ module.exports = (app, repository) => {
   app.get('/cities/:city/cinemas', async (req, res, next) => {
     if (!req.params.city) return res.sendStatus(400);
     const cinemas = await repository.getCinemasByCityId(req.params.city);
+    console.log('cinemas', cinemas)
     if (!cinemas || cinemas.length === 0) return res.sendStatus(404);
     res.json(cinemas);
   })

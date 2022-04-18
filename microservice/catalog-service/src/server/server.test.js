@@ -1,19 +1,17 @@
-const test = require('tape');
+//server.test.js
+require('dotenv-safe').config();
 const server = require('./server');
 
 function apiMock(app, repo) {
   console.log("do nothing");
 }
-function runTests() {
-  test('Server Start', (t) => {
-    server.start(apiMock, null, (err, srv) => {
-      t.assert(!err && srv, "Server started");
-      t.end();
-    });
-  })
-  test('Server Stop', (t) => {
-    t.assert(server.stop(), "Server stopped");
-    t.end();
-  })
-}
-module.exports = { runTests }
+
+test('Server Start', async () => {
+  const instance = await server.start(apiMock, null);
+  expect(instance).toBeTruthy();
+})
+
+test('Server Stop', async () => {
+  const isStopped = await server.stop();
+  expect(isStopped).toBeTruthy();
+})
