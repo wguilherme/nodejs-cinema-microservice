@@ -15,7 +15,7 @@ function start(api, repository, callback) {
   })
 
   api(app, repository)
-  server = app.listen(parseInt(process.env.PORT), () => callback(null, server))
+  server = app.listen(parseInt(process.env.PORT), () => callback(null, server), () => { console.log('Server is running at port ' + process.env.PORT) })
 }
 
 function stop() {
