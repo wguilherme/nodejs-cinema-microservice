@@ -17,7 +17,17 @@ app.use(cookieParser());
 const catalogServiceProxy = httpProxy('http://localhost:3001');
 const moviesServiceProxy = httpProxy('http://localhost:3002');
 
+function verifyJwt(req, res, next) {
+  const token = req.headers['x-access-token']
+  if (!token) return res.status(401).send({ auth: false, message: 'No token provided' })
 
+  jwt.verify(token, process.env.SECRET, (err, decoded) => {
+    if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token' })
+    req.userId = decoded.id
+  })
+
+  next()
+}
 
 
 app.post('/login', (req, res, next) => {
@@ -33,13 +43,19 @@ app.post('/login', (req, res, next) => {
   }
 })
 
+app.get('/logout', (req, res) => {
+  res.status(200).send({ auth: false, token: null })
+})
 
-app.get('/cities', (req, res, next) => {
+
+app.get('/cities', verifyJwt, (req, res, next) => {
   catalogServiceProxy(req, res, next);
 })
-app.get('/movies', (req, res, next) => {
+app.get('/movies', verifyJwt, (req, res, next) => {
   moviesServiceProxy(req, res, next);
 })
+
+
 
 
 var server = http.createServer(app);
