@@ -12,7 +12,7 @@ use microservice-catalog
 show collections
 
 
-
+```
 // populate movies
 // use movies
 db.movies.insert([{
@@ -39,11 +39,12 @@ db.movies.insert([{
    imagem: "http://www.luiztools.com.br/vingadores.jpg",
    categorias: ["Aventura", "Ação"]
 }])
+```
 
 
 
 
-
+```
 // populate cinemaCatalog
 // use cinema-catalog-service
 db.cinemaCatalog.insert([
@@ -179,3 +180,4 @@ db.cinemaCatalog.insert([
      }
     ]
 }])
+```
